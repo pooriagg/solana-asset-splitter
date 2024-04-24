@@ -19,7 +19,6 @@ use {
     },
     crate::{
         instruction::SplitterInstruction,
-        event::Event,
         error::SplitterError
     }
 };
@@ -51,18 +50,6 @@ impl Processor {
                 ]
             )?;
         };
-
-        let account_keys = accounts[1..]
-            .iter()
-            .map(|account_data| *account_data.key)
-            .collect::<Vec<_>>();
-
-        let event = Event::LamportsSplitted {
-            source_account: *source_account.key,
-            destination_accounts: account_keys,
-            amounts: (*amounts).to_vec()
-        };
-        msg!("Event: {:?}", event);
 
         Ok(())
     }
@@ -96,19 +83,6 @@ impl Processor {
                 ]
             )?;
         };
-
-        let accounts_keys = accounts[2..]
-            .iter()
-            .map(|account_data| *account_data.key)
-            .collect::<Vec<_>>();
-
-        let event = Event::SplTokensSplittedFromSignleMint {
-            operator: *operator.key,
-            source_account: *source_ata.key,
-            destination_accounts: accounts_keys,
-            amounts: (*amounts).to_vec()
-        };
-        msg!("Event: {:?}", event);
 
         Ok(())
     }
@@ -170,23 +144,6 @@ impl Processor {
                 .checked_add(1usize)
                 .unwrap();
         };
-
-        let source_atas = source_atas
-            .iter()
-            .map(|ata_info| *ata_info.key)
-            .collect::<Vec<_>>();
-        let destination_atas = destination_atas
-            .iter()
-            .map(|ata_info| *ata_info.key)
-            .collect::<Vec<_>>();
-
-        let event = Event::SplTokensSplittedFromMultipleMints {
-            operator: *operator.key,
-            source_accounts: source_atas,
-            destination_accounts: destination_atas,
-            amounts: (*amounts).to_vec()
-        };
-        msg!("Event: {:?}", event);
 
         Ok(())
     }

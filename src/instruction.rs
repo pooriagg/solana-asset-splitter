@@ -60,7 +60,7 @@ pub enum SplitterInstruction {
     ///     0. `[signer]` owner/delegator of the source token account
     ///     1. `[]` token-standard-program
     ///     2. 2..2+m `[writable]` m source accounts
-    ///     3. m+1.. `[wrtiable]` m destination accounts
+    ///     3. m+2.. `[wrtiable]` m destination accounts
     SplitSplTokensFromMultipleMints(
         Vec<u64>,
         u16

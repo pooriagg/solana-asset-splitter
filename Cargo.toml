@@ -1,0 +1,27 @@
+[package]
+name = "solana_asset_splitter"
+description = "Split all solana assets like spl-tokens and lamports to the multiple recepients"
+version = "1.0.0"
+edition = "2021"
+authors = [ "PooriaGG - poor123mn@gmail.com" ]
+license = "Apache-2.0"
+
+[features]
+no-entrypoint = []
+test-sbf = []
+
+[dependencies]
+# borsh-derive = "0.10.0"
+solana-program = "=1.17.10"
+spl-token = { version = "4.0.0", features = [ "no-entrypoint" ] }
+thiserror = "1.0.52"
+# ahash = "=0.8.6"
+borsh = ">=0.9, <0.11"
+
+[dev-dependencies]
+solana-program-test = "=1.17.10"
+solana-sdk = "=1.17.10"
+
+[lib]
+name = "solana_asset_splitter"
+crate-type = ["cdylib", "lib"]
